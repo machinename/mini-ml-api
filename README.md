@@ -1,5 +1,4 @@
-# mini ML - API
-Welcome to mini ML - API, a minimalistic Flask machine learning application.
+# Mini ML - API
 
 ## Tech Stack
 - **Frameworks**: Flask
