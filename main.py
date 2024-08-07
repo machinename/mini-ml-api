@@ -35,32 +35,7 @@ def fetch_server_public_key():
     except Exception as error:
         print(f'Error During Get Public Key Request: {str(error)}')
         return jsonify({'Error During Get Public Key Request': str(error)}), 500
-    
-@app.route('/fetch_user_storage', methods=['POST'])
-def fetch_user_storage():
-    try:
-        is_auth, auth_response, code = firebase_services.authenticate_request()
-        if not is_auth:
-            return auth_response, code
 
-        request_data = request.get_json()
-
-        encrypted_user_id = base64.b64decode(request_data['user_id'])
-        if not encrypted_user_id:
-            return jsonify({'Missing Required Parameters'}), 400
-    
-        # RSA
-        cipher_rsa = PKCS1_OAEP.new(_server_key)
-        decrypted_user_id = cipher_rsa.decrypt(encrypted_user_id)
-        user_id = decrypted_user_id.decode('utf-8')
-        
-        response, code = firebase_services.fetch_user_storage(user_id=user_id)
-        
-        return response, code
-    except Exception as error:
-        print(f'{str(error)}')
-        return jsonify({'Error Fetching User Storage': str(error)}), 500
-    
 @app.route('/create_project', methods=['POST'])
 def create_project():
     try:
