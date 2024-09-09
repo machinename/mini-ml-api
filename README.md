@@ -1,4 +1,4 @@
-# Mini ML - API
+# Mini ML - Server
 
 ## Tech Stack
 - **Frameworks**: Flask
